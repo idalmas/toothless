@@ -1,15 +1,5 @@
-# Welcome to your InstantDB NextJS app 👋
+## Toothless Web App 
 
-This is a NextJS project scaffolded with create-instant-app.
-
-To run the development server:
-`npm run dev`
-
-To push schema changes:
-`npx instant-cli push`
-
-To pull schema changes:
-`npx instant-cli pull`
-
-
-Got any feedback or questions? Join our [Discord](https://discord.gg/hgVf9R6SBm)
+This uses: 
+- InstantDB for DB
+- Sortable from Dice UI for dragging logic (https://www.diceui.com/docs/components/sortable)

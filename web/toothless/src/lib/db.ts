@@ -34,3 +34,12 @@ export function deleteTodo(todoId: string) {
 export function toggleTodo(todo: Todo) {
   db.transact(db.tx.todos[todo.id].update({ isCompleted: !todo.isCompleted }));
 }
+
+/* 
+  Update the overallPriority field of a todo based on it's index in our array. 
+*/
+export function reorderTodos(newTodos: Todo[]) {
+  newTodos.forEach((todo, index) => {
+    db.transact(db.tx.todos[todo.id].update({ overallPriority: index }));
+  });
+}
