@@ -84,14 +84,15 @@ function App() {
                       checked={t.isCompleted || false}
                       onChange={() => toggleTodo(t)}
                       onPointerDown={(e) => e.stopPropagation()}
+                      style={{margin: "4px 8px"}}
                     />
                     <SortableItemHandle><span>{t.text}</span></SortableItemHandle>
-                    <button onClick={() => deleteTodo(t.id!)}>Delete</button>
+                    <button style={{border:"1px solid black", margin: "4px 8px"}}onClick={() => deleteTodo(t.id!)}>Delete</button>
                   </div>
                 </SortableItem>
               ))}
             </SortableContent>
-            
+
             {/* <SortableOverlay>
             {(activeItem) => {
               const t = incompleteTodos.find((t) => t.id === activeItem.value);
