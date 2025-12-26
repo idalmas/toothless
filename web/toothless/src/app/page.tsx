@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/sortable";
 type Todo = InstaQLEntity<AppSchema, "todos">;
 
+/* Main view of app: 
+  Create, delete, and complete tasks
+*/
 function App() {
   const [todoText, setTodoText] = useState("");
   const { data, isLoading, error } = db.useQuery({ todos: {} });
@@ -37,6 +40,11 @@ function App() {
     .sort((a, b) => (a.overallPriority ?? 0) - (b.overallPriority ?? 0));
 
   return (
+    <Sortable
+            value={incompleteTodos}
+            onValueChange={reorderTodos}
+            getItemValue={(item) => item.id}
+          >
     <div style={{ maxWidth: "600px", margin: "10px auto", padding: "20px" }}>
       <div>
         <div style={{ margin: "10px auto" }}>Today's tasks:</div>
@@ -49,6 +57,7 @@ function App() {
         />
 
         <div style={{ margin: "10px auto" }}>
+          
           <button
             onClick={() => {
               createTodo(todoText);
@@ -65,11 +74,7 @@ function App() {
         </div>
         <div>
           {" "}
-          <Sortable
-            value={incompleteTodos}
-            onValueChange={reorderTodos}
-            getItemValue={(item) => item.id}
-          >
+          
             <SortableContent>
               {incompleteTodos.map((t) => (
                 <SortableItem key={t.id} value={t.id}>
@@ -86,11 +91,26 @@ function App() {
                 </SortableItem>
               ))}
             </SortableContent>
-            <SortableOverlay />
-          </Sortable>
+            
+            {/* <SortableOverlay>
+            {(activeItem) => {
+              const t = incompleteTodos.find((t) => t.id === activeItem.value);
+              if (!t) return null;
+              return (
+                <div style={{}}>
+                  <span>{t.text}</span>
+                </div>
+              );
+            }}
+          </SortableOverlay> */}
+            
+          
         </div>
+               
       </div>
+
     </div>
+   </Sortable>
   );
 }
 
