@@ -32,23 +32,32 @@ function App() {
         placeholder="What do you want to get done?"
         value={todoText}
         onChange={(e) => setTodoText(e.target.value)}
+        style={{padding: "4px"}}
       />
+     
       <div style={{margin: '10px auto'}}>
       <button
         onClick={() => {
           createTodo(todoText);
           setTodoText("");
         }}
-        style={{ border: "1px solid black"}}
-      >
+        style={{ border: "1px solid black", borderRadius: "3px", padding: '2px'}}
+      > 
+        <div >
         Add Todo
+        </div>
       </button>
       </div>
       <div>
         {" "}
-        {todos.map((t) => {
+
+        {todos
+        .filter((t) => !t.isCompleted)
+        // sort by .overallPriority in ascedning order
+        .sort((a,b) => (a.overallPriority ?? 0) - (b.overallPriority ?? 0))
+        .map((t) => {
           return (
-            <div key={t.id}>
+            <div style={{}}key={t.id}>
               <input
                 type="checkbox"
                 checked={t.isCompleted || false}
