@@ -14,10 +14,11 @@ const _schema = i.schema({
       type: i.string().optional(),
     }),
     todos: i.entity({
-      text: i.string(),
-      done: i.boolean(),
-      createdAt: i.number(),
-      dueDate: i.date(),
+      createdAt: i.number().optional(),
+      dueDate: i.date().indexed().optional(),
+      isCompleted: i.boolean().indexed(),
+      overallPriority: i.number().unique().indexed().optional(),
+      text: i.string().optional(),
     }),
   },
   links: {
